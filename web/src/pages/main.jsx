@@ -23,9 +23,9 @@ const fetch = async (payload) => {
 const LoadingSkelton = () => {
     return (
         <div>
-            <Skeleton h="80vh">
-                <div></div>
-            </Skeleton>
+            <Skeleton h="200px" mx={6} my={4} borderRadius={10} />
+            <Skeleton h="200px" mx={6} mb={4} borderRadius={10} />
+            <Skeleton h="200px" mx={6} borderRadius={10} />
         </div>
     );
 };
@@ -44,14 +44,14 @@ const Main = () => {
         setHits(hits);
     };
     return (
-        <Box minHeight="100vh" minW="100vw" justify="center">
+        <Box minHeight="100vh" minW="90vw" justify="center">
             <Box px={8} py={4} justify="center" borderRadius={10} width="full" bg="whitesmoke" boxShadow="2xl">
-                <Heading justify="center">Sinhala Movie Lyrics</Heading>
+                <Heading justify="center">Sinhala Movie Lyrics and Metaphors</Heading>
                 <SearchBar placeholder={"Search for your query........."} onSubmit={onSubmit} />
             </Box>
             {isLoading && <LoadingSkelton />}
             <Box m="6" p="4">
-                {isSearched && <Results songs={songs} hits={hits} />}
+                {isSearched && !isLoading && <Results songs={songs} hits={hits} />}
             </Box>
         </Box>
     );
@@ -60,7 +60,7 @@ const Main = () => {
 const Results = ({ songs, isLoading, hits }) => {
     return songs.length > 0 ? (
         <div>
-            <div>{`${hits} results for the search query`}</div>
+            {hits > 10 && <div>{`${hits} results for the search query`}</div>}
             {songs.map((song, index) => (
                 <SongCard key={index} songInfo={song._source} />
             ))}

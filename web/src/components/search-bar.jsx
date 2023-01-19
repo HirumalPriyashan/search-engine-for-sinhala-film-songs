@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
-import { Box, Input, InputGroup, InputRightElement, FormControl } from "@chakra-ui/react";
+import { Box, Input, InputGroup, InputLeftElement, FormControl } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 export const SearchBar = ({ placeholder = "", onSubmit = {} }) => {
@@ -15,16 +15,16 @@ export const SearchBar = ({ placeholder = "", onSubmit = {} }) => {
                 <Box>
                     <FormControl>
                         <InputGroup>
+                            <InputLeftElement
+                                onClick={props.submitForm}
+                                children={<SearchIcon color="green.500" _hover={{ cursor: "pointer" }} />}
+                            />
                             <Input
                                 id="query-input"
                                 placeholder={placeholder}
                                 name="query"
                                 value={props.initialValues.query}
                                 {...props.getFieldProps("query")}
-                            />
-                            <InputRightElement
-                                onClick={props.submitForm}
-                                children={<SearchIcon color="green.500" _hover={{ cursor: "pointer" }} />}
                             />
                         </InputGroup>
                     </FormControl>

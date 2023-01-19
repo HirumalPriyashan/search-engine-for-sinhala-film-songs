@@ -24,7 +24,7 @@ const InfoComponent = ({ header, sinhala, english, other }) => {
                 {english}
             </Text>
             {other && (
-                <Text as="i" fontSize="xs" color="gray.600">
+                <Text as="i" color="gray.800">
                     {other}
                 </Text>
             )}

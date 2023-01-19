@@ -58,7 +58,7 @@ settings = {
             "film": {
                 "type": "text",
                 "fields": {"keyword": {"type": "keyword", "ignore_above": 256}},
-                "analyzer": "sinhala_analyzer",
+                "analyzer": "sinhala_analyzer_2",
             },
             "film_english": {
                 "type": "text",
@@ -164,7 +164,7 @@ settings = {
             "title": {
                 "type": "text",
                 "fields": {"keyword": {"type": "keyword", "ignore_above": 256}},
-                "analyzer": "sinhala_analyzer",
+                "analyzer": "sinhala_analyzer_2",
             },
             "title_english": {
                 "type": "text",
