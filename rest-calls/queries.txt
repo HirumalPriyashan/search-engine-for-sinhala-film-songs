@@ -1,0 +1,107 @@
+GET song-index/_search
+
+GET song-index/_count
+
+GET song-index/_mapping
+
+GET song-index/_search
+
+GET song-ind/_search
+{
+  "query":{
+    "multi_match": {
+      "query": "ආදරය ගැන ",
+      "fields": ["metaphors.domain^2"]
+    }
+  },
+  "_source": { "includes": ["metaphors"] }
+}
+
+GET song-ind/_search
+{
+  "query":{
+    "multi_match": {
+      "query": "එච්.ආර්.ජෝතිපාල ආදරය ගැන ",
+      "fields": ["metaphors.domain^2", "artist^2"]
+    }
+  },
+  "_source": { "includes": ["metaphors", "artist", "release_date"] },
+}
+
+GET song-ind/_search
+{
+  "query": {
+    "match_phrase": {
+      "artist": "එච්.ආර්.ජෝතිපාල"
+    }
+  },
+  "_source": { "includes": ["metaphors"] }
+}
+
+
+GET song-ind/_search
+{
+  "query":{
+    "multi_match": {
+      "query": "එච්.ආර්.ජෝතිපාල ආදරය ගැන ",
+      "fields": ["metaphors.domain^2", "artist^2"]
+    }
+  },
+  "_source": { "includes": ["metaphors", "artist", "release_date"] },
+  "aggs": {
+        "range": {
+            "date_range": {
+                "field": "release_date",
+                "format": "yyyy",
+                "ranges": [
+                    { "to": "1990" },
+                    { "from": "1980" }
+                ]
+            }
+        }
+    }
+}
+
+GET song-ind/_search
+{
+  "query": {
+      "bool": {
+          "filter": [
+              {
+                  "range": {
+                      "release_date": {
+                          "gte": "1980-01-01",
+                          "lte": "1990-01-01"
+                      }
+                  }
+              }
+          ]
+      }
+  },
+  "_source": { "includes": ["release_date"] }
+}
+
+GET song-ind/_search
+{
+  "query": {
+      "bool": {
+        "must": [{
+          "multi_match": {
+                  "query": "එච්.ආර්.ජෝතිපාල ආදරය ගැන ",
+                  "fields": ["metaphors.domain^2", "artist^2"]
+                }
+        }
+      ],
+          "filter": [
+              {
+                  "range": {
+                      "release_date": {
+                          "gte": "1980",
+                          "lte": "1990"
+                      }
+                  }
+              }
+          ]
+      }
+  }
+}

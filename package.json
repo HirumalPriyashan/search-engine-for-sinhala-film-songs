@@ -1,0 +1,23 @@
+{
+  "name": "search-engine-for-sinhala-film-songs",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HirumalPriyashan/search-engine-for-sinhala-film-songs.git"
+  },
+  "keywords": [
+    "search-engine",
+    "sinhala",
+    "metaphors",
+    "movies",
+    "songs",
+    "lyrics"
+  ],
+  "author": "Hirumal Priyashan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HirumalPriyashan/search-engine-for-sinhala-film-songs/issues"
+  },
+  "homepage": "https://github.com/HirumalPriyashan/search-engine-for-sinhala-film-songs#readme"
+}

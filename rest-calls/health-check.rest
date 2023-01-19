@@ -1,0 +1,28 @@
+# flask
+GET http://localhost:5000/hello HTTP/1.1
+
+###
+GET http://localhost:5000/health HTTP/1.1
+
+###
+GET http://localhost:5000/create_index HTTP/1.1
+
+###
+GET http://localhost:5000/add_data HTTP/1.1
+
+###
+DELETE http://localhost:5000/delete HTTP/1.1
+
+###
+GET http://localhost:5000/mapping HTTP/1.1
+
+###
+POST http://localhost:5000/search HTTP/1.1
+content-type: application/json
+
+{
+    "query": "එච්.ආර්.ජෝතිපාල ආදරය ගැන කිව්ව සිංදු"
+}
+
+###
+එච්.ආර්.ජෝතිපාල ආදරය ගැන කිව්ව සිංදු
