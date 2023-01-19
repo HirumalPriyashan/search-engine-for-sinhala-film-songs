@@ -35,13 +35,13 @@ Each song contains the following data fields.
     4. Meaning
     5. Domain
 7. Film - Both Sinhala and English
-8. Film no- Number
-9. Release date- Date
+8. Film no - Number
+9. Release date - Date
 10. Film genre - Both Sinhala and English
 11. Main actors - Both Sinhala and English
 12. Main actresses - Both Sinhala and English
 13. Directors - Both Sinhala and English
-14. Produces - Both Sinhala and English
+14. Producers - Both Sinhala and English
 
 ## Usage
 
