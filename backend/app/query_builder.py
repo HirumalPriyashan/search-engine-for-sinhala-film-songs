@@ -11,26 +11,13 @@ genre_boosters = ["නාට්ය", "පවුලේ", "වාර්තාම�
 cat_boosters = ["ගැන", "සම්බන්ධ", "සම්බන්ද"]
 film_boosters = ["චිත්‍රපටියේ"]
 time_boosters = ["පසු", "දී", "පෙර"]
-boost_defaults = {
-    "title": 1.5,
-    "artist": 1,
-    "lyrics_by": 1,
-    "music_by": 1,
-    "film_genres": 1,
-    "lyrics": 1,
-    # "release_date": 1,
-    "metaphors.domain": 1.5,
-    "metaphors.target": 1.5,
-    "film": 1,
-}
-
 
 class QueryBuilder:
     @classmethod
     def get_boosts(self, query):
         tokens = tokenizer.tokenize(query)
         boost_params = []
-        boosts = boost_defaults
+        boosts = {}
         time_params = []
         # print("Tokens:", tokens)
         for token in tokens:
@@ -72,6 +59,17 @@ class QueryBuilder:
                 boost_params.append("music_by")
                 boosts["music_by"] = 2
 
+            # actor_boosters
+            if (
+                token in actor_boosters
+                or splits["affix"] in actor_boosters
+                or splits["base"] in actor_boosters
+            ):
+                boost_params.append("main_actors")
+                boosts["main_actors"] = 2
+                boost_params.append("main_actresses")
+                boosts["main_actresses"] = 2
+
             # genre_boosters
             if (
                 token in genre_boosters
@@ -107,8 +105,6 @@ class QueryBuilder:
                 or splits["affix"] in time_boosters
                 or splits["base"] in time_boosters
             ):
-                # boost_params.append("release_date")
-                # boosts["release_date"] = 2
                 if token == "පසු":
                     time_params.append("gte")
                 if token == "දී":
@@ -138,7 +134,6 @@ class QueryBuilder:
         boosts_params, boosts, query, time_params = self.get_boosts(query)
         # print(boosts_params, time_params)
         if len(boosts_params) != 0:
-            print(boosts, time_params)
             if len(time_params) != 0:
                 return self.time_range_query(query, boosts, time_params)
             else:
@@ -155,7 +150,6 @@ class QueryBuilder:
         # extract years
         years = [int(match.group()) for match in re.finditer(r"19[4-9][0-9]", query, re.MULTILINE)]
         years = list(map(str, sorted(years)))
-        print(years)
         date_range = {}
         for param in time_params:
             if param == 'lt':
@@ -191,11 +185,14 @@ class QueryBuilder:
 
 
 if __name__ == "__main__":
+    queries = [
+        "ආදරය ගැන උපමා",
+        "එච්.ආර්.ජෝතිපාල කිව්ව සිංදු",
+        "එච්.ආර්.ජෝතිපාල ආදරය ගැන කිව්ව සිංදු",
+        "1970ට පෙර නන්දා මාලනී ගැයූ ගීත",
+        "1970ට පසු 1980ට පෙර නන්දා මාලනී ගැයූ ගීත",
+        "1970ට පසු 1980ට පෙර එච්.ආර්.ජෝතිපාල  ගැයූ ගීතවල ආදරය ගැන උපමා"
+    ]
     qb = QueryBuilder()
-    qb.build_query("1970ට පසු 1980ට පෙර නන්දා මාලනී ගැයූ ගීත")
-    # qb.build_query("1970ට පෙර නන්දා මාලනී ගැයූ ගීත")
-    # qb.build_query("1970 දී නන්දා මාලනී ගැයූ ගීත")
-    # qb.build_query("එච්.ආර්.ජෝතිපාල කිව්ව සිංදු")
-    # qb.build_query("එච්.ආර්.ජෝතිපාල ආදරය ගැන කිව්ව සිංදු")
-    # qb.build_query("ආදරය ගැන උපමා")
-    print(qb.build_query("1970ට පසු 1980ට පෙර එච්.ආර්.ජෝතිපාල  ගැයූ ගීතවල ආදරය ගැන උපමා"))
+    for query in queries:
+        print(qb.build_query(query))

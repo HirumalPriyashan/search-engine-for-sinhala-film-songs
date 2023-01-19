@@ -52,5 +52,4 @@ class FilmSpider(scrapy.Spider):
         film['directors_english'] = directors
         film['producers_english'] = producers
 
-
         yield film
