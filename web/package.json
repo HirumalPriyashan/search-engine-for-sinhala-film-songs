@@ -1,0 +1,46 @@
+{
+  "name": "metaphors",
+  "version": "1.0.0",
+  "private": true,
+  "description": "metaphors",
+  "author": "Hirumal Priyashan",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@chakra-ui/gatsby-plugin": "^3.1.1",
+    "@chakra-ui/icons": "^2.0.16",
+    "@chakra-ui/react": "^2.4.8",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.5",
+    "@reduxjs/toolkit": "^1.9.1",
+    "axios": "^1.2.3",
+    "dotenv": "^16.0.3",
+    "formik": "^2.2.9",
+    "framer-motion": "^8.4.2",
+    "gatsby": "^5.4.0",
+    "gatsby-source-filesystem": "^5.4.0",
+    "gatsby-transformer-remark": "^6.4.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "redux": "^4.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.0",
+    "gatsby-plugin-eslint": "^4.0.3",
+    "prettier": "^2.8.2"
+  }
+}
